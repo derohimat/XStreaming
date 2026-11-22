@@ -1713,27 +1713,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eva-design/dss@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@eva-design/dss@npm:2.2.0"
-  checksum: 10c0/22ffc50d684751fec24ec80424de6b2f19fc37c4666950940854520ddee79dd91b29ae64c4d74c8305d199108b78c026e336a12dc1c5334df4b249e7b126bc0f
-  languageName: node
-  linkType: hard
-
-"@eva-design/eva@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@eva-design/eva@npm:2.2.0"
-  checksum: 10c0/7c212abdd066f254b670a4ad6f1f840ab46525506c120087937ab27685733d347067d0ebea21413fc41822ed7ef00a64f191150c5515113fe7f1b864808343bf
-  languageName: node
-  linkType: hard
-
-"@eva-design/processor@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@eva-design/processor@npm:2.2.0"
-  checksum: 10c0/423b98b49db894e0f5962c24dcbdaacfa3abbca536ed529b10a1c3494574b0e2833dbe3f0d528d61846cc9e010570b5802943aaab430f07dae36ff666231adb4
-  languageName: node
-  linkType: hard
-
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -3183,33 +3162,6 @@ __metadata:
     "@typescript-eslint/types": "npm:5.62.0"
     eslint-visitor-keys: "npm:^3.3.0"
   checksum: 10c0/7c3b8e4148e9b94d9b7162a596a1260d7a3efc4e65199693b8025c71c4652b8042501c0bc9f57654c1e2943c26da98c0f77884a746c6ae81389fcb0b513d995d
-  languageName: node
-  linkType: hard
-
-"@ui-kitten/components@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@ui-kitten/components@npm:5.3.1"
-  dependencies:
-    "@eva-design/dss": "npm:^2.2.0"
-    "@eva-design/processor": "npm:^2.2.0"
-    fecha: "npm:3.0.3"
-    hoist-non-react-statics: "npm:^3.2.1"
-    lodash.merge: "npm:^4.6.1"
-  peerDependencies:
-    react-native-svg: "*"
-  checksum: 10c0/75aa765b265bf3b5d8e73da3e156956bd01c323634bb0a595abb8e1db1ad626638f67b744a05de4ec920988e60c2cf170a94d1e55489a127bfe31e3122f020fb
-  languageName: node
-  linkType: hard
-
-"@ui-kitten/eva-icons@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@ui-kitten/eva-icons@npm:5.3.1"
-  dependencies:
-    react-native-eva-icons: "npm:^1.3.1"
-  peerDependencies:
-    "@ui-kitten/components": 5.3.1
-    react-native-svg: "*"
-  checksum: 10c0/87a9de3cc5d54c1ca0d1f879c55dbf6bced23c2a316a26cd25c2e366bd22035dd1e20c098c5f12974ff98a138e3eba31929701d073bc9ac7aa4ff1d8ebaa4d16
   languageName: node
   linkType: hard
 
@@ -5392,13 +5344,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fecha@npm:3.0.3":
-  version: 3.0.3
-  resolution: "fecha@npm:3.0.3"
-  checksum: 10c0/62c9f69f905788ff767c4784faabaf106d87e81670b3ab519d1d36af4fb32b7fe7882f2980e8d70de08e176c79b17231d5c1d9051908fa006723a5f9e9e41ca1
-  languageName: node
-  linkType: hard
-
 "file-entry-cache@npm:^6.0.1":
   version: 6.0.1
   resolution: "file-entry-cache@npm:6.0.1"
@@ -5917,7 +5862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.2.1, hoist-non-react-statics@npm:^3.3.0":
+"hoist-non-react-statics@npm:^3.3.0":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -7352,7 +7297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.merge@npm:^4.6.1, lodash.merge@npm:^4.6.2":
+"lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 10c0/402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
@@ -8013,13 +7958,6 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: 10c0/46ea0f3ffa8bc6a5bc0c7081ffc3907777f0ed6516888d40a518c5111f8366d97d2678911ad1a6882bf592fa9de6c784fea32e1687bb94e1f4944170af48a5cf
-  languageName: node
-  linkType: hard
-
-"moment@npm:^2.30.1":
-  version: 2.30.1
-  resolution: "moment@npm:2.30.1"
-  checksum: 10c0/865e4279418c6de666fca7786607705fd0189d8a7b7624e2e56be99290ac846f90878a6f602e34b4e0455c549b85385b1baf9966845962b313699e7cb847543a
   languageName: node
   linkType: hard
 
@@ -8909,16 +8847,6 @@ __metadata:
     react: ">=18.2.0"
     react-native: ">=0.73.0"
   checksum: 10c0/15411945d953702dadf866493007eabd6da8b730e5420365dd165da8c2c7ad72e51ebc4f1917c051ac27bd86a32ddaeaa1ea5caea2f298c5f3a976575e507a20
-  languageName: node
-  linkType: hard
-
-"react-native-eva-icons@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "react-native-eva-icons@npm:1.3.1"
-  peerDependencies:
-    react: 16.5.0
-    react-native-svg: ^9.4.0
-  checksum: 10c0/f91983bb18ad615c4e7cfce1eaed5917ac00ecd13db4f72b4c9f755df5ea86084664c02b338c6f7ea6d361d87ad13cfbaff36f5dd30ce74dddfb0bb22a2bfa38
   languageName: node
   linkType: hard
 
@@ -10956,7 +10884,6 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
-    "@eva-design/eva": "npm:^2.2.0"
     "@react-native-clipboard/clipboard": "npm:^1.16.3"
     "@react-native-community/netinfo": "npm:^11.3.2"
     "@react-native-community/slider": "npm:^4.5.2"
@@ -10976,8 +10903,6 @@ __metadata:
     "@types/react-test-renderer": "npm:^18.0.0"
     "@types/sdp-transform": "npm:^2.15.0"
     "@types/semver": "npm:^7"
-    "@ui-kitten/components": "npm:^5.3.1"
-    "@ui-kitten/eva-icons": "npm:^5.3.1"
     axios: "npm:^1.7.2"
     babel-jest: "npm:^29.2.1"
     deepmerge: "npm:^4.3.1"
@@ -10987,7 +10912,6 @@ __metadata:
     ip-address: "npm:^9.0.5"
     jest: "npm:^29.2.1"
     metro-react-native-babel-preset: "npm:^0.76.9"
-    moment: "npm:^2.30.1"
     patch-package: "npm:^8.0.0"
     prettier: "npm:^2.4.1"
     react: "npm:18.2.0"
