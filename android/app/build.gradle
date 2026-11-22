@@ -96,7 +96,10 @@ android {
         }
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                // minSdk 24: declare API 26+ NDK symbols (AHardwareBuffer etc., used only by
+                // LSFG frame generation) as weak so the library still loads on Android 7.
+                cppFlags "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__"
+                cFlags "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__"
             }
         }
     }

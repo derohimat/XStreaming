@@ -22,8 +22,7 @@ import java.security.spec.ECGenParameterSpec;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.time.Instant;
-import java.util.Base64;
+import android.util.Base64;
 import java.util.UUID;
 import java.math.BigInteger;
 import java.io.ByteArrayOutputStream;
@@ -50,6 +49,15 @@ public class XalManager extends ReactContextBaseJavaModule {
         return KEY_PAIR_GEN.generateKeyPair();
     }
 
+    // java.util.Base64 / java.time need Android 8 (API 26); android.util.Base64 works on Android 7.
+    private static String base64Url(byte[] data) {
+        return Base64.encodeToString(data, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
+    }
+
+    private static String base64(byte[] data) {
+        return Base64.encodeToString(data, Base64.NO_WRAP);
+    }
+
     private static byte[] bigIntegerToByteArray(BigInteger bigInteger) {
         byte[] array = bigInteger.toByteArray();
         if (array[0] == 0) {
@@ -61,16 +69,16 @@ public class XalManager extends ReactContextBaseJavaModule {
     }
 
     private String getProofKeyX(ECPublicKey ecPublicKey) {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bigIntegerToByteArray(ecPublicKey.getW().getAffineX()));
+        return base64Url(bigIntegerToByteArray(ecPublicKey.getW().getAffineX()));
     }
 
     private String getProofKeyY(ECPublicKey ecPublicKey) {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bigIntegerToByteArray(ecPublicKey.getW().getAffineY()));
+        return base64Url(bigIntegerToByteArray(ecPublicKey.getW().getAffineY()));
     }
 
     // windowsTimestamp returns a Windows specific timestamp. It has a certain offset from Unix time which must be accounted for.
     private long windowsTimestamp() {
-        return (Instant.now().getEpochSecond() + 11644473600L) * 10000000L;
+        return (System.currentTimeMillis() / 1000L + 11644473600L) * 10000000L;
     }
 
     private ECPublicKey publicKey;
@@ -102,12 +110,12 @@ public class XalManager extends ReactContextBaseJavaModule {
 
     @ReactMethod(isBlockingSynchronousMethod=true)
     public String getKeyX() {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bigIntegerToByteArray(this.publicKey.getW().getAffineX()));
+        return base64Url(bigIntegerToByteArray(this.publicKey.getW().getAffineX()));
     }
 
     @ReactMethod(isBlockingSynchronousMethod=true)
     public String getKeyY() {
-        return Base64.getUrlEncoder().withoutPadding().encodeToString(bigIntegerToByteArray(this.publicKey.getW().getAffineY()));
+        return base64Url(bigIntegerToByteArray(this.publicKey.getW().getAffineY()));
     }
 
     @ReactMethod(isBlockingSynchronousMethod=true)
@@ -161,7 +169,7 @@ public class XalManager extends ReactContextBaseJavaModule {
         byteArrayOutputStream.write(Longs.toByteArray(currentTime));
         byteArrayOutputStream.write(signatureBytes);
 
-        result = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
+        result = base64(byteArrayOutputStream.toByteArray());
 
         return result;
     }
@@ -173,7 +181,7 @@ public class XalManager extends ReactContextBaseJavaModule {
         new SecureRandom().nextBytes(randomBytes);
 
         // 将随机字节序列转换为base64编码
-        String codeVerifier = Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
+        String codeVerifier = base64Url(randomBytes);
 
         // 使用SHA-256哈希算法对codeVerifier进行哈希运算
         byte[] codeVerifierBytes = codeVerifier.getBytes();
@@ -186,7 +194,7 @@ public class XalManager extends ReactContextBaseJavaModule {
         }
 
         // 将结果转换为base64编码
-        String codeChallengeBase64 = Base64.getUrlEncoder().withoutPadding().encodeToString(codeChallenge);
+        String codeChallengeBase64 = base64Url(codeChallenge);
 
 //        Log.d("XalManager", "code_verifier: " + codeVerifier);
 //        Log.d("XalManager", "code_challenge: " + codeChallengeBase64);
@@ -205,7 +213,7 @@ public class XalManager extends ReactContextBaseJavaModule {
         int bytes = 64;
         byte[] randomBytes = new byte[bytes];
         new SecureRandom().nextBytes(randomBytes);
-        String base64Url = Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
+        String base64Url = base64Url(randomBytes);
         return base64Url;
     }
 }

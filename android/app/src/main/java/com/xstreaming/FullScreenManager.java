@@ -27,6 +27,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import android.webkit.WebView;
+import androidx.webkit.WebViewCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +134,8 @@ public class FullScreenManager extends ReactContextBaseJavaModule {
     public String getWebViewVersion() {
         String version = "";
         try {
-            PackageInfo infos = WebView.getCurrentWebViewPackage();
+            // WebView.getCurrentWebViewPackage() is API 26+; the androidx version also works on Android 7.
+            PackageInfo infos = WebViewCompat.getCurrentWebViewPackage(reactContext);
             if (infos != null) {
                 version = infos.versionName;
             }
