@@ -2481,6 +2481,21 @@ export function NativeStreamScreenBase({
           }
           if (showPerformance) {
             setPerformance(await mergeFrameGenStats(res));
+            // One compact line per second for bench/bench_xstreaming.sh (panel visible only).
+            if (res) {
+              console.log(
+                '[XSPERF] ' +
+                  JSON.stringify({
+                    fps: res.fps,
+                    decode: res.decode,
+                    jit: res.jit,
+                    rtt: res.rtt,
+                    br: res.br,
+                    fl: res.fl,
+                    pl: res.pl,
+                  }),
+              );
+            }
           }
           if (res && isReportEnabled) {
             sessionStatsTracker.recordSample({
@@ -2500,7 +2515,12 @@ export function NativeStreamScreenBase({
     };
 
     updatePerformance();
-    performanceInterval.current = setInterval(updatePerformance, 1000);
+    // getStats() every second only while the performance panel is visible; for the
+    // session report alone a 5 s sample is enough and saves CPU on weak devices.
+    performanceInterval.current = setInterval(
+      updatePerformance,
+      showPerformance ? 1000 : 5000,
+    );
 
     return () => {
       if (performanceInterval.current) {

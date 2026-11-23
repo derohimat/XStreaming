@@ -33,6 +33,10 @@ export default class GamepadDriver implements Driver {
 
   _timer: any = null;
 
+  // Last gamepad state handed to the input channel, to skip identical resends.
+  _lastQueuedKey = '';
+  _lastQueuedAt = 0;
+
   setApplication(application: webRTCClient) {
     this._application = application;
   }
@@ -102,10 +106,22 @@ export default class GamepadDriver implements Driver {
       : [];
 
     if (!this._isVirtualButtonPressing) {
-      const clonedStates = gpStates.map(state => ({...state}));
-      this._application
-        ?.getChannelProcessor('input')
-        .queueGamepadStates(clonedStates);
+      // Gamepad packets carry absolute state, so an unchanged state doesn't need to be
+      // re-sent every poll (62.5 Hz). Send on change, plus a 100 ms heartbeat so the
+      // console always has the latest state. Cuts input packets/bridge calls when idle.
+      const key = JSON.stringify(gpStates);
+      const now = Date.now();
+      if (key !== this._lastQueuedKey || now - this._lastQueuedAt >= 100) {
+        this._lastQueuedKey = key;
+        this._lastQueuedAt = now;
+        const clonedStates = gpStates.map(state => ({...state}));
+        this._application
+          ?.getChannelProcessor('input')
+          .queueGamepadStates(clonedStates);
+      }
+    } else {
+      // Force a send as soon as the virtual button is released.
+      this._lastQueuedKey = '';
     }
 
     // requestAnimationFrame(() => { this.run() })

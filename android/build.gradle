@@ -3,7 +3,8 @@
 buildscript {
     ext {
         buildToolsVersion = "34.0.0"
-        minSdkVersion = 26
+        // Android 7.0 (was 26) so it runs on the Galaxy Tab A 8.0 (SM-P355, Android 7.1.1)
+        minSdkVersion = 24
         compileSdkVersion = 34
         targetSdkVersion = 34
         kotlinVersion = '1.8.10'
@@ -12,8 +13,9 @@ buildscript {
         ndkVersion = "23.1.7779620"
     }
     repositories {
-//        google()
-//        mavenCentral()
+        // Official repositories first (faster outside China); Aliyun mirrors kept as fallback.
+        google()
+        mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://repo1.maven.org/maven2/' }

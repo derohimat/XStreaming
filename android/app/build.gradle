@@ -96,7 +96,10 @@ android {
         }
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                // minSdk 24: declare API 26+ NDK symbols (AHardwareBuffer etc., used only by
+                // LSFG frame generation) as weak so the library still loads on Android 7.
+                cppFlags "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__"
+                cFlags "-D__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__"
             }
         }
     }
@@ -261,9 +264,7 @@ dependencies {
 
     implementation project(':react-native-splash-screen')
 
-    // umeng
-    implementation  'com.umeng.umsdk:common:9.4.7'// required
-    implementation  'com.umeng.umsdk:asms:1.4.1'// required
+    // Umeng analytics (com.umeng.umsdk:common / asms) removed for this build.
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
